@@ -1,35 +1,36 @@
 # Team Task Manager
 
-A full-stack task management system for teams.
+A full-stack web app for managing tasks across teams. Built with React on the frontend and Node/Express on the backend, using PostgreSQL for storage.
 
-## Tech Stack
+## Stack
 
-- **Frontend**: React 18, Vite, React Router v6, Axios, Lucide React
-- **Backend**: Node.js, Express 5
-- **Database**: PostgreSQL
-- **Auth**: JWT, Bcrypt.js
+- React 18 + Vite + React Router v6
+- Node.js + Express
+- PostgreSQL
+- JWT authentication
 
-## How to Run
+## Running locally
 
-### Prerequisites
-- Node.js v18+
-- PostgreSQL installed and running
+You'll need Node.js v18+ and a running PostgreSQL instance.
 
-### 1. Backend
+**Backend:**
 
 ```bash
 cd backend
 npm install
-cp .env.example .env   # add your PostgreSQL credentials and JWT secret
-npm start              # runs on http://localhost:5000
+cp .env.example .env
+# fill in your DB credentials and a JWT secret in .env
+npm start
 ```
 
-### 2. Frontend
+The server starts on `http://localhost:5000`. On first run it will create the database tables automatically.
+
+**Frontend:**
 
 ```bash
 cd frontend
 npm install
-npm run dev            # runs on http://localhost:5173
+npm run dev
 ```
 
-> The database schema is created automatically on first backend startup. No manual SQL needed.
+The dev server runs on `http://localhost:5173`.

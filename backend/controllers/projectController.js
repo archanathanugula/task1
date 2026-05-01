@@ -35,7 +35,6 @@ exports.getProjectById = async (req, res) => {
 exports.updateProject = async (req, res) => {
   try {
     const { name, description } = req.body;
-    // For simplicity, we just use raw query here or expand model
     const db = require("../db");
     const result = await db.query(
       "UPDATE projects SET name = $1, description = $2 WHERE id = $3 RETURNING *",

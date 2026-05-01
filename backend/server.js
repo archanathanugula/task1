@@ -15,7 +15,6 @@ app.use("/api/dashboard", require("./routes/dashboardRoutes"));
 
 app.get("/", (req, res) => res.send("API Running"));
 
-// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");

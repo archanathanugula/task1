@@ -1,25 +1,20 @@
-# Team Task Manager — Backend
+# Backend
 
-## Tech Stack
+Node.js + Express REST API backed by PostgreSQL.
 
-- **Runtime**: Node.js (v18+)
-- **Framework**: Express 5
-- **Database**: PostgreSQL
-- **Auth**: JWT (`jsonwebtoken`), Bcrypt.js
-- **DB Driver**: `pg` (node-postgres)
-- **Other**: `dotenv`, `cors`
+## Setup
 
-## How to Run
-
-### 1. Install Dependencies
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### 2. Configure Environment
+Copy the example env file and fill in your values:
 
-Create a `.env` file (or copy `.env.example`):
+```bash
+cp .env.example .env
+```
 
 ```env
 PORT=5000
@@ -31,10 +26,14 @@ DB_NAME=taskmanager
 JWT_SECRET=your_jwt_secret
 ```
 
-### 3. Start the Server
+Then start the server:
 
 ```bash
 npm start
 ```
 
-API runs at `http://localhost:5000`. The database schema initializes automatically on startup.
+It runs on `http://localhost:5000`. The database schema is created automatically on startup so you don't need to run any SQL manually.
+
+## Auth
+
+Endpoints are protected with JWT. Pass the token in the `Authorization` header. Admin-only routes additionally check the user's role.
