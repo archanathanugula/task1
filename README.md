@@ -4,7 +4,7 @@ A full-stack web app for managing tasks across teams. Built with React on the fr
 
 ## Stack
 
-- React 18 + Vite + React Router v6
+- React 
 - Node.js + Express
 - PostgreSQL
 - JWT authentication
