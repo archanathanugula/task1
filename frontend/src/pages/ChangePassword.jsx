@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 import { KeyRound, CheckCircle2, AlertCircle, ArrowLeft } from 'lucide-react';
 
 const ChangePassword = () => {
@@ -27,7 +27,7 @@ const ChangePassword = () => {
 
     setLoading(true);
     try {
-      await axios.put('http://localhost:5000/api/auth/change-password', {
+      await api.put('/auth/change-password', {
         oldPassword,
         newPassword
       });

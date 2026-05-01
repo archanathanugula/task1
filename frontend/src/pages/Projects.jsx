@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../context/AuthContext';
 import { Plus, ArrowRight } from 'lucide-react';
 
@@ -13,7 +13,7 @@ const Projects = () => {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/projects');
+      const res = await api.get('/projects');
       setProjects(res.data);
     } catch (err) {
       console.error(err);
@@ -27,7 +27,7 @@ const Projects = () => {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/projects', newProj);
+      await api.post('/projects', newProj);
       setShowModal(false);
       setNewProj({ name: '', description: '' });
       fetchProjects();

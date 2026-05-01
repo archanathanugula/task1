@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { CheckCircle2, Clock, ListTodo, AlertTriangle } from 'lucide-react';
 
 const Dashboard = () => {
@@ -9,8 +9,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const statsRes = await axios.get('http://localhost:5000/api/dashboard');
-        const tasksRes = await axios.get('http://localhost:5000/api/tasks');
+        const statsRes = await api.get('/dashboard');
+        const tasksRes = await api.get('/tasks');
         setStats(statsRes.data);
         setTasks(tasksRes.data);
       } catch (err) {
@@ -22,10 +22,10 @@ const Dashboard = () => {
 
   const handleStatusUpdate = async (taskId, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/tasks/${taskId}`, { status });
+      await api.put(`/tasks/${taskId}`, { status });
       const [statsRes, tasksRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/dashboard'),
-        axios.get('http://localhost:5000/api/tasks')
+        api.get('/dashboard'),
+        api.get('/tasks')
       ]);
       setStats(statsRes.data);
       setTasks(tasksRes.data);

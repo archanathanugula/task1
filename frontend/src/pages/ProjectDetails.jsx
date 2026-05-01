@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../context/AuthContext';
 import { Plus, UserPlus, Trash2 } from 'lucide-react';
 
@@ -17,12 +17,12 @@ const ProjectDetails = () => {
 
   const fetchData = async () => {
     try {
-      const projRes = await axios.get(`http://localhost:5000/api/projects/${id}`);
-      const tasksRes = await axios.get(`http://localhost:5000/api/tasks?projectId=${id}`);
+      const projRes = await api.get(`/projects/${id}`);
+      const tasksRes = await api.get(`/tasks?projectId=${id}`);
       setProject(projRes.data);
       setTasks(tasksRes.data);
       if (user?.role === 'Admin') {
-        const usersRes = await axios.get('http://localhost:5000/api/auth/all-users');
+        const usersRes = await api.get('/auth/all-users');
         setUsers(usersRes.data);
       }
     } catch (err) {
@@ -37,7 +37,7 @@ const ProjectDetails = () => {
   const handleCreateTask = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/tasks', { ...newTask, project_id: id });
+      await api.post('/tasks', { ...newTask, project_id: id });
       setShowTaskModal(false);
       setNewTask({ title: '', description: '', assigned_to: '', due_date: '' });
       fetchData();
@@ -48,7 +48,7 @@ const ProjectDetails = () => {
 
   const handleAddMember = async (userId) => {
     try {
-      await axios.put(`http://localhost:5000/api/projects/${id}/add-member`, { userId });
+      await api.put(`/projects/${id}/add-member`, { userId });
       setShowMemberModal(false);
       fetchData();
     } catch (err) {
@@ -59,7 +59,7 @@ const ProjectDetails = () => {
   const handleRemoveMember = async (userId) => {
     if (!window.confirm('Are you sure you want to remove this member?')) return;
     try {
-      await axios.put(`http://localhost:5000/api/projects/${id}/remove-member`, { userId });
+      await api.put(`/projects/${id}/remove-member`, { userId });
       fetchData();
     } catch (err) {
       alert('Failed to remove member');
